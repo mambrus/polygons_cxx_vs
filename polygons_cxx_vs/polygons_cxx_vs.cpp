@@ -1,11 +1,10 @@
+#include "stdafx.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
 #include <malloc.h>
 
-#include <simple/SimpleFunctions.h>
-#include <advanced/AdvancedFunctions.h>
-#include <Vector.h>
+#include "../Math/Vector.h"
 
 #include<iostream>
 #include<map>
@@ -35,13 +34,13 @@ int glob_gdb_1 = 0;
 
 // Helper function until better constructors / static casting methods exists
 template < class T >
-    Vector < Vector < T > >MatrixInitialize(const Vector < Vector < T > >&me,
-					    T baseval)
+Vector < Vector < T > >MatrixInitialize(const Vector < Vector < T > >&me,
+	T baseval)
 {
 	Vector < Vector < T > >R = me;
-	int dim1 = R.Length();
-	int dim2 = R[0].Length();
-	T I[dim1] = { 0 };
+	size_t dim1 = R.Length();
+	size_t dim2 = R[0].Length();
+	T *I = new T[dim1]; for (int i = 0; i < dim1; i++) { I[i] = 0; }
 
 	int i, j;
 
@@ -52,20 +51,12 @@ template < class T >
 		R[j] = I;
 	}
 
+	free(I);
 	return R;
 }
 
 int main(int argc, char *argv[])
 {
-	struct mallinfo before, after;
-	int mused;
-
-	before = mallinfo();
-
-	after = mallinfo();
-	mused =
-	    (after.uordblks - before.uordblks) + (after.hblkhd - before.hblkhd);
-	printf("Allocated memory: %d \n", mused);
 
 	{
 		// Define a 2-dimensional integer vector (matrix) and test index operators
@@ -78,7 +69,7 @@ int main(int argc, char *argv[])
 			// Create the matrix
 			printf("Instantiating matrix\n");
 			Vector < Vector < int > >matrix(dim1,
-						       Vector < int >(dim2));
+				Vector < int >(dim2));
 			printf("Initializing matrix\n");
 			matrix = MatrixInitialize < int >(matrix, 11);
 
@@ -105,7 +96,7 @@ int main(int argc, char *argv[])
 			// Create the matrix
 			printf("Instantiating matrix\n");
 			Vector < Vector < double > >matrix(dim1,
-							  Vector < double >(dim2));
+				Vector < double >(dim2));
 			printf("Initializing matrix\n");
 			matrix = MatrixInitialize < double >(matrix, 1.1);
 
@@ -143,8 +134,8 @@ int main(int argc, char *argv[])
 			Vector < int >D = C;
 
 			cout << "A:" << A << endl
-			    << "B:" << B << endl << "C:" << C << endl << "D:" <<
-			    D << endl;
+				<< "B:" << B << endl << "C:" << C << endl << "D:" <<
+				D << endl;
 
 			// ===========================================
 			cout << "Index operator <int>:" << endl;
@@ -161,8 +152,8 @@ int main(int argc, char *argv[])
 			}
 
 			cout << "A:" << A << endl
-			    << "B:" << B << endl << "C:" << C << endl << "D:" <<
-			    D << endl;
+				<< "B:" << B << endl << "C:" << C << endl << "D:" <<
+				D << endl;
 
 			// ===========================================
 			cout << "Test exception<int>s:" << endl;
@@ -173,18 +164,18 @@ int main(int argc, char *argv[])
 				try {
 					D[i] = B[i];
 				}
-				catch(const std::invalid_argument & e) {
+				catch (const std::invalid_argument & e) {
 					cout <<
-					    "Dang! Exception \"invalid_argument\" at index="
-					    << i <<
-					    " and caught. Further info: " <<
-					    e.what() << endl;
+						"Dang! Exception \"invalid_argument\" at index="
+						<< i <<
+						" and caught. Further info: " <<
+						e.what() << endl;
 				}
 			}
 
 			cout << "A:" << A << endl
-			    << "B:" << B << endl << "C:" << C << endl << "D:" <<
-			    D << endl;
+				<< "B:" << B << endl << "C:" << C << endl << "D:" <<
+				D << endl;
 		}
 
 		cout << endl;
@@ -203,8 +194,8 @@ int main(int argc, char *argv[])
 			Vector < double >D = C;
 
 			cout << "A:" << A << endl
-			    << "B:" << B << endl << "C:" << C << endl << "D:" <<
-			    D << endl;
+				<< "B:" << B << endl << "C:" << C << endl << "D:" <<
+				D << endl;
 
 			// ===========================================
 			cout << "Index operator <double>:" << endl;
@@ -221,8 +212,8 @@ int main(int argc, char *argv[])
 			}
 
 			cout << "A:" << A << endl
-			    << "B:" << B << endl << "C:" << C << endl << "D:" <<
-			    D << endl;
+				<< "B:" << B << endl << "C:" << C << endl << "D:" <<
+				D << endl;
 
 			// ===========================================
 			cout << "Test exceptions <double>:" << endl;
@@ -233,18 +224,18 @@ int main(int argc, char *argv[])
 				try {
 					D[i] = B[i];
 				}
-				catch(const std::invalid_argument & e) {
+				catch (const std::invalid_argument & e) {
 					cout <<
-					    "Dang! Exception \"invalid_argument\" at index="
-					    << i <<
-					    " and caught. Further info: " <<
-					    e.what() << endl;
+						"Dang! Exception \"invalid_argument\" at index="
+						<< i <<
+						" and caught. Further info: " <<
+						e.what() << endl;
 				}
 			}
 
 			cout << "A:" << A << endl
-			    << "B:" << B << endl << "C:" << C << endl << "D:" <<
-			    D << endl;
+				<< "B:" << B << endl << "C:" << C << endl << "D:" <<
+				D << endl;
 		}
 #endif				//NEVER
 
@@ -278,9 +269,9 @@ int main(int argc, char *argv[])
 			// Create the matrix
 			printf("Instantiating matrixs\n");
 			Vector < Vector < int > >mx1(dim1,
-						       Vector < int >(dim2));
+				Vector < int >(dim2));
 			Vector < Vector < int > >mx2(dim1,
-						       Vector < int >(dim2));
+				Vector < int >(dim2));
 			printf("Initializing matrixs\n");
 			mx1 = MatrixInitialize < int >(mx1, 11);
 			mx2 = MatrixInitialize < int >(mx2, 57);
@@ -337,18 +328,13 @@ int main(int argc, char *argv[])
 		printf("=================================================\n");
 		printf("Printout of static Vector-stats before last scope\n");
 		printf("=================================================\n");
-		PVECTOR_STATS;
+		//PVECTOR_STATS;
 
 	}
 	printf("=================================================\n");
 	printf("Printout of static Vector-stats after last scope\n");
 	printf("=================================================\n");
-	PVECTOR_STATS;
-
-	after = mallinfo();
-	mused =
-	    (after.uordblks - before.uordblks) + (after.hblkhd - before.hblkhd);
-	printf("Allocated memory: %d \n", mused);
+	//PVECTOR_STATS;
 
 	return 0;
 }

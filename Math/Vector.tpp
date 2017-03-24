@@ -44,7 +44,6 @@ template < class T > Vector < T >::Vector(size_t i, T a[])
 template < class T > Vector < T >::Vector(size_t i)
 {
 	statmng();
-	T t;
 
 	m_n = i;
 	m_v = (T **) calloc(i, sizeof(T *));
