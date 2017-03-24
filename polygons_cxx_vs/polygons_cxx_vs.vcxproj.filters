@@ -13,6 +13,24 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\Math">
+      <UniqueIdentifier>{1879624d-e81d-4f0e-8668-abbcc131f05e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Math\Base">
+      <UniqueIdentifier>{785f7a54-7473-4b95-9dc9-68a255ee7926}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Math\LinearAlgebra">
+      <UniqueIdentifier>{cfe339e4-13b8-4470-adab-ad230a03c17e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Math">
+      <UniqueIdentifier>{45f42cee-9ced-41cf-b19d-2bcd58d4aa07}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Math\Base">
+      <UniqueIdentifier>{a2ad2966-b4f8-4b00-85c8-8364c7ce2b15}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Math\LinearAlgebra">
+      <UniqueIdentifier>{ca105866-04f8-4922-b2a1-3684f197cf81}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -24,6 +42,12 @@
     <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\Math\Base\Vector.h">
+      <Filter>Header Files\Math\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Math\LinearAlgebra\vector.h">
+      <Filter>Header Files\Math\LinearAlgebra</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -34,8 +58,8 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\Math\vector.tpp">
-      <Filter>Source Files</Filter>
+    <None Include="..\Math\Base\Vector.tpp">
+      <Filter>Source Files\Math\Base</Filter>
     </None>
   </ItemGroup>
 </Project>

@@ -3,7 +3,7 @@
 #include <math.h>
 #include <malloc.h>
 
-#include "../Math/Vector.h"
+#include "../Math/LinearAlgebra/Vector.h"
 
 #include <iostream>
 #include <map>
@@ -31,7 +31,7 @@
 
 int glob_gdb_1 = 0;
 
-using namespace Math;
+using namespace Math::Base;
 
 int main(int argc, char *argv[])
 {
