@@ -4,9 +4,14 @@
 # http://davidlaing.com/2012/09/19/customise-your-gitattributes-to-become-a-git-ninja/
 * text=auto
 
-# C# part from monorepo
-#================================================
-*.cs     diff=csharp
+# Add header-metadata for git-external diff programs
+#==================================================
+*.cs    diff=csharp
+*.cpp   diff=cpp
+*.cxx   diff=cpp
+*.c     diff=cpp
+*.h     diff=cpp
+*.tpp     diff=cpp
 
 #*.sln    text eol=crlf
 #*.csproj text eol=crlf
