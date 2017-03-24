@@ -1,13 +1,12 @@
 #include "stdafx.h"
 #include <stdio.h>
-#include <stdlib.h>
 #include <math.h>
 #include <malloc.h>
 
 #include "../Math/Vector.h"
 
-#include<iostream>
-#include<map>
+#include <iostream>
+#include <map>
 
 #define PVECTOR_STATS { \
 	cout << "Vector < int >:"; \
@@ -40,7 +39,7 @@ Vector < Vector < T > >MatrixInitialize(const Vector < Vector < T > >&me,
 	Vector < Vector < T > >R = me;
 	size_t dim1 = R.Length();
 	size_t dim2 = R[0].Length();
-	T *I = new T[dim1]; for (int i = 0; i < dim1; i++) { I[i] = 0; }
+	T *I = new T[dim2]; for (int i = 0; i < dim2; i++) { I[i] = 0; }
 
 	int i, j;
 
@@ -330,11 +329,14 @@ int main(int argc, char *argv[])
 		printf("=================================================\n");
 		//PVECTOR_STATS;
 
-	}
+		}
 	printf("=================================================\n");
 	printf("Printout of static Vector-stats after last scope\n");
 	printf("=================================================\n");
 	//PVECTOR_STATS;
 
+	cout << "Enter to exit" << endl;
+	std::string tsring;
+	cin >> tsring;
 	return 0;
 }
