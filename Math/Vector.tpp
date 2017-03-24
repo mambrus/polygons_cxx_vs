@@ -144,6 +144,30 @@ template < class T > T & Vector < T >::operator [](size_t i) {
 	return *(m_v[i]);
 }
 
+/* NOTE Stubbed. Fixme TBD !!!*/
+template < class T > bool Vector < T >::is_zero(const T & d)
+{
+	return false;
+}
+template < class T > void Vector < T >::free_array()
+{
+	if (m_n > 0 && m_v) {
+		for (size_t i = 0; i < m_n; i++) {
+			free(m_v[i]);
+		}
+		free(m_v);
+	}
+}
+
+// Destructor.
+template < class T > Vector < T >::~Vector()
+{
+	--instances;
+	free_array();
+}
+
+// Class external - friends
+//=======================================================================
 // Add operator
 template < class T >
     const Vector < T > operator +(const Vector < T > lhs,
@@ -209,21 +233,30 @@ const Vector operator /(const Vector lhs, const T & d)
 }
 #endif				//NEVER
 
-template < class T > void Vector < T >::free_array()
-{
-	if (m_n > 0 && m_v) {
-		for (size_t i = 0; i < m_n; i++) {
-			free(m_v[i]);
-		}
-		free(m_v);
-	}
-}
 
-// Destructor.
-template < class T > Vector < T >::~Vector()
+// Helper functions
+//==============================================================================
+// Helper function until better constructors / static casting methods exists
+template < class T >
+Vector < Vector < T > >MatrixInitialize(const Vector < Vector < T > >&me,
+	T baseval)
 {
-	--instances;
-	free_array();
+	Vector < Vector < T > >R = me;
+	size_t dim1 = R.Length();
+	size_t dim2 = R[0].Length();
+	T *I = new T[dim2]; for (int i = 0; i < dim2; i++) { I[i] = 0; }
+
+	int i, j;
+
+	for (j = 0; j < dim1; j++) {
+		for (i = 0; i < dim2; i++) {
+			I[i] = baseval + (100 * j + i);
+		}
+		R[j] = I;
+	}
+
+	free(I);
+	return R;
 }
 
 /* Class stats variables */
@@ -231,8 +264,3 @@ template < class T > Vector < T >::~Vector()
 template < class T > int Vector < T >::instances = 0;
 template < class T > int Vector < T >::ntotever = 0;
 
-/* NOTE Stubbed TBD !!!*/
-template < class T > bool Vector < T >::is_zero(const T & d)
-{
-	return false;
-}
