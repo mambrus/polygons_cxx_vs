@@ -172,6 +172,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\Math\Base\Vector.tpp" />
+    <None Include="..\Math\LinearAlgebra\Vector.tpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

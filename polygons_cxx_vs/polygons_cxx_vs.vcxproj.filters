@@ -61,5 +61,8 @@
     <None Include="..\Math\Base\Vector.tpp">
       <Filter>Source Files\Math\Base</Filter>
     </None>
+    <None Include="..\Math\LinearAlgebra\Vector.tpp">
+      <Filter>Source Files\Math\LinearAlgebra</Filter>
+    </None>
   </ItemGroup>
 </Project>

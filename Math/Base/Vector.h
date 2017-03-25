@@ -1,8 +1,8 @@
-#ifndef Vector_h
-#    define Vector_h
-#    include <stdlib.h>
-#    include <iostream>
-#    include <sstream>
+#pragma once
+
+#include <stdlib.h>
+#include <iostream>
+#include <sstream>
 
 using namespace std;
 
@@ -14,7 +14,7 @@ namespace Math {
 	namespace Base {
 		template < class T > class Vector {
 
-		protected:
+		private:
 			//Sub-optimal ways of keeping track of statistics
 			static int instances;
 			static int ntotever;
@@ -24,7 +24,7 @@ namespace Math {
 				ntotever++;
 			};
 
-		private:
+		protected:
 			T ** m_v;
 			size_t m_n;
 			int m_uid;		/* Unique id. Used for debugging DTOR/CTOR order of
@@ -55,46 +55,27 @@ namespace Math {
 			// Index operator
 			virtual T & operator[] (size_t i);
 
-			//Linear algebra operators
-			// ====================================================================
-			template < class Y >
-			const friend Vector < Y > operator +(const Vector < Y >
-				lhs,
-				const Vector < Y >
-				&);
-			template < class Y > const friend Vector < Y >
-				operator -(const Vector < Y >, const Vector < Y > &);
+			friend ostream & operator<<(ostream & out, const Vector & v) {
+				size_t i;
+				out << "{";
+				for (i = 0; i < v.m_n - 1; i++) {
+					out << *(v.m_v[i]) << ",";
+				};
+				out << *(v.m_v[i]) << "}";
+				return out;
+			}
 
+			static ostream & stats(ostream & out) {
+				out << "{i=";
+				out << instances;
+				out << ",";
+				out << "t=";
+				out << ntotever;
+				out << "}" << endl;
+				return out;
+			}
 
-#    ifdef NEVER
-				const friend Vector operator *(const Vector lhs,
-					const T & m);
-				const friend Vector operator /(const Vector lhs,
-					const T & d);
-#    endif			//NEVER
-				// ====================================================================
-
-				friend ostream & operator<<(ostream & out, const Vector & v) {
-					size_t i;
-					out << "{";
-					for (i = 0; i < v.m_n - 1; i++) {
-						out << *(v.m_v[i]) << ",";
-					};
-					out << *(v.m_v[i]) << "}";
-					return out;
-				}
-
-				static ostream & stats(ostream & out) {
-					out << "{i=";
-					out << instances;
-					out << ",";
-					out << "t=";
-					out << ntotever;
-					out << "}" << endl;
-					return out;
-				}
-
-				~Vector();
+			~Vector();
 		};
 
 		// Helper functions
@@ -103,7 +84,7 @@ namespace Math {
 			T baseval);
 
 		// Include template implementation
-#    include "Vector.tpp"
+#include "Vector.tpp"
+
 	}
 }
-#endif				//Vector_h

@@ -3,6 +3,7 @@
 #include <math.h>
 #include <malloc.h>
 
+#include "../Math/Base/Vector.h"
 #include "../Math/LinearAlgebra/Vector.h"
 
 #include <iostream>
@@ -31,7 +32,7 @@
 
 int glob_gdb_1 = 0;
 
-using namespace Math::Base;
+using namespace Math::LinearAlgebra;
 
 int main(int argc, char *argv[])
 {
@@ -48,7 +49,7 @@ int main(int argc, char *argv[])
 			Vector < Vector < int > >matrix(dim1,
 				Vector < int >(dim2));
 			printf("Initializing matrix\n");
-			matrix = MatrixInitialize < int >(matrix, 11);
+			matrix = Math::LinearAlgebra::MatrixInitialize < int >(matrix, 11);
 
 			// Print matrix out in various forms and using various methods
 			for (i = 0; i < dim1; i++) {
@@ -75,7 +76,7 @@ int main(int argc, char *argv[])
 			Vector < Vector < double > >matrix(dim1,
 				Vector < double >(dim2));
 			printf("Initializing matrix\n");
-			matrix = MatrixInitialize < double >(matrix, 1.1);
+			matrix = Math::LinearAlgebra::MatrixInitialize < double >(matrix, 1.1);
 
 			// Print matrix out in various forms and using various methods
 			for (i = 0; i < dim1; i++) {
@@ -223,10 +224,10 @@ int main(int argc, char *argv[])
 			glob_gdb_1 = 1;
 			Vector < int >A(4);
 			int a[] = { 11, 12, 13, 14 };
-			A = a;
+			(Math::Base::Vector < int >)A = a;
 			Vector < int >B(4);
 			int b[] = { 21, 22, 23, 24 };
-			B = b;
+			(Math::Base::Vector < int >)B = b;
 			cout << "A:" << A << endl;
 			cout << "B:" << B << endl;
 			Vector < int >C = A + B;
